@@ -1,5 +1,6 @@
-import React from "react";
+// import React from "react";
 import { useState } from "react";
+import React, { Component } from "react";
 // import styled from 'style-components';
 
 const divStyle = {
@@ -25,34 +26,85 @@ const buttonStyle = {
   border: 'none',
   cursor: 'pointer',
 };
-export function CounterApp() {
-  const [count, setCount] = useState(0);
 
-  const increment = () => {
-    setCount((prevCount) => prevCount + 1);
+
+class CounterApp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    };
+  }
+
+  increment = () => {
+    this.setState((prevState) => ({ count: prevState.count + 1 }));
   };
 
-  const decrement = () => {
-    if (count > 0) {
-      setCount((prevCount) => prevCount - 1);
+  decrement = () => {
+    if (this.state.count > 0) {
+      this.setState((prevState) => ({ count: prevState.count - 1 }));
     }
   };
 
-  return (
-    <body style={divStyle}>
-      <div style={buttonDiv}>
-        <button style={buttonStyle} variant="contained" onClick={decrement}>
-          -
-        </button>
-      </div>
-      <div>
-        <p>Counter: {count}</p>
-      </div>
-      <div style={buttonDiv}>
-        <button style={buttonStyle} variant="contained" onClick={increment}>
-          +
-        </button>
-      </div>
-    </body>
-  );
+  render() {
+    return (
+      <body style={divStyle}>
+        <div style={buttonDiv}>
+          <button
+            style={buttonStyle}
+            variant="contained"
+            onClick={this.decrement}
+          >
+            -
+          </button>
+        </div>
+        <div>
+          <p>Counter: {this.state.count}</p>
+        </div>
+        <div style={buttonDiv}>
+          <button
+            style={buttonStyle}
+            variant="contained"
+            onClick={this.increment}
+          >
+            +
+          </button>
+        </div>
+      </body>
+    );
+  }
 }
+
+export default CounterApp;
+
+// export function CounterApp() {
+//   const [count, setCount] = useState(0);
+
+//   const increment = () => {
+//     setCount((prevCount) => prevCount + 1);
+//   };
+
+//   const decrement = () => {
+//     if (count > 0) {
+//       setCount((prevCount) => prevCount - 1);
+//     }
+//   };
+
+//   return (
+//     <body style={divStyle}>
+//       <div style={buttonDiv}>
+//         <button style={buttonStyle} variant="contained" onClick={decrement}>
+//           -
+//         </button>
+//       </div>
+//       <div>
+//         <p>Counter: {count}</p>
+//       </div>
+//       <div style={buttonDiv}>
+//         <button style={buttonStyle} variant="contained" onClick={increment}>
+//           +
+//         </button>
+//       </div>
+//     </body>
+//   );
+// }
